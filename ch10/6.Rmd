@@ -11,11 +11,18 @@ observations onto the first principal component. Another way of explaining it is
 component.
 
 ### b
-Given the flaw shown in pre-analysis of a time-wise linear trend amongst the
-tissue samples' first principal component, I would advise the researcher to
-include the machine used (A vs B) as a feature of the data set. This should
-enhance the PVE of the first principal component before applying the two-sample
-t-test.
+Since the loading vectors are unit vectors, the first principal component scores
+$z_{i1}=X_i\cdot\phi_1$ are the scalar projections of each gene vector on the
+first principal component. Thus, the rows of the new matrix are the vector
+rejection of each gene vector on the first principal component. That is:
+$$
+X_i-\frac{X_i\cdot\phi_1}{\phi_1\cdot\phi_1}\phi_1
+=X_i-z_{i1}\phi_1
+=(x_{ij}-z_{i1}\phi_{j1})_j.
+$$
+Rejecting onto the first principal component removes the 10% of the variation
+in the data correlated with the machine used, hopefully leaving only variation
+attributable to genes and group status.
 
 ### c
 ```{r}
